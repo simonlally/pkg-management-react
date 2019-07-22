@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Redirect } from 'react-router-dom';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Axios from 'axios';
@@ -7,26 +9,35 @@ import Axios from 'axios';
 
 class login extends React.Component { 
   
+  
   constructor(props) {
     super(props);
 
     this.state = {
-      email: "",
-      password: ""
+        email: "",
+        password: "", 
+        isLoggedIn: false,
     };
+    this.handleClick = this.handleClick.bind(this);
   }
   
+
+
   validate() {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }  
 
   handleClick(event) {
+    event.preventDefault();
     console.log();
-    const loginUrl = "http://localhost:5000/mydb-34040/us-central1/api/login";
+    //const localUrl = "http://localhost:5000/mydb-34040/us-central1/api/login";
+    const loginUrl = "https://us-central1-mydb-34040.cloudfunctions.net/api/login";
     const user = {
-      "email": "test@test.com",
-      "password": "test1234"
+      "email": this.state.email,
+      "password": this.state.password,
     }
+
+    console.log(user);
 
     var headers = {
       "Content-Type": "application/json",
@@ -35,10 +46,12 @@ class login extends React.Component {
     Axios.post(loginUrl, user, headers)
       .then((res) => {
         console.log(res);
+        this.setState({isLoggedIn: true});
       })
       .catch((err) => {
         console.error(err);
       })
+
   }
  
 render() {
@@ -48,16 +61,17 @@ render() {
       <TextField 
         hinttext="Enter your email to login"
         floatinglabeltext="email"
-        onChange={(event, newValue) => this.setState({email: newValue})}
+        onChange={(event) => this.setState({email: event.target.value})}
       >
      </TextField>
      <TextField 
         hinttext="Enter your password to login"
         floatinglabeltext="passwrd"
-        onChange={(event, newValue) => this.setState({password: newValue})}
+        onChange={(event) => this.setState({password: event.target.value})}
       >
      </TextField>
-     <Button  label="submit" onClick={(event) => this.handleClick(event)}> </Button>
+     <Button color="primary" label="submit" onClick={(event) => this.handleClick(event)}> </Button>
+     {this.state.isLoggedIn && (<Redirect to="/tenantHome" push />)}
     </div>
     );
   }

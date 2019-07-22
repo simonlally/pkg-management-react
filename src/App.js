@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import home from './pages/home';
 import register from './pages/register';
 import login from './pages/login';
+import tenantHome from './pages/tenantHome';
 
 import Navbar from './components/Navbar';
 
@@ -20,8 +21,10 @@ class App extends React.Component {
             <Route exact path="/" component={home}/>
             <Route exact path="/register" component={register}/>
             <Route exact path="/login" component={login}/>
+            <Route exact path="/tenanthome" component={tenantHome}/>
           </Switch>
           </div>
+
         </Router>
       </div>
     )
