@@ -9,7 +9,6 @@ import Axios from 'axios';
 
 class login extends React.Component { 
   
-  
   constructor(props) {
     super(props);
 
@@ -17,11 +16,12 @@ class login extends React.Component {
         email: "",
         password: "", 
         isLoggedIn: false,
+        token: "",
     };
     this.handleClick = this.handleClick.bind(this);
   }
   
-
+  
 
   validate() {
     return this.state.email.length > 0 && this.state.password.length > 0;
@@ -30,7 +30,7 @@ class login extends React.Component {
   handleClick(event) {
     event.preventDefault();
     console.log();
-    //const localUrl = "http://localhost:5000/mydb-34040/us-central1/api/login";
+    //const localUrl = "http://localhost:5000/mydb-34040/us-central1/api";
     const loginUrl = "https://us-central1-mydb-34040.cloudfunctions.net/api/login";
     const user = {
       "email": this.state.email,
@@ -46,6 +46,7 @@ class login extends React.Component {
     Axios.post(loginUrl, user, headers)
       .then((res) => {
         console.log(res);
+        this.setState({token: res.data.token});
         this.setState({isLoggedIn: true});
       })
       .catch((err) => {
@@ -58,25 +59,30 @@ render() {
   return (
     <div className="Login">
       <h1>Login</h1>
-      <TextField 
-        hinttext="Enter your email to login"
-        floatinglabeltext="email"
+      <TextField
+        margin="normal" 
         onChange={(event) => this.setState({email: event.target.value})}
       >
      </TextField>
      <TextField 
-        hinttext="Enter your password to login"
-        floatinglabeltext="passwrd"
-        onChange={(event) => this.setState({password: event.target.value})}
-      >
+        margin="normal" 
+        onChange={(event) => this.setState({password: event.target.value})} >
      </TextField>
-     <Button color="primary" label="submit" onClick={(event) => this.handleClick(event)}> </Button>
-     {this.state.isLoggedIn && (<Redirect to="/tenantHome" push />)}
+     
+     <Button size="large" variant="contained" color="primary" label="submit" onClick={(event) => this.handleClick(event)}> </Button>
+     {/* { this.state.isLoggedIn && this.state.isManager ? (<Redirect to={{pathname:"/manager", state: {token: this.state.token} }}  push />) : (<Redirect to={{pathname:"/tenantHome", state: {token: this.state.token} }}  push />) } */}
+     {this.state.isLoggedIn && (
+       <Redirect to={{
+         pathname:"/tenantHome", 
+         state: {token: this.state.token} }}
+         push />
+         )}
     </div>
     );
   }
 
 }
 
+ 
 
 export default login;
