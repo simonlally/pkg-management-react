@@ -77,24 +77,28 @@ class login extends React.Component {
 render() {
   return (
     <div className='container'>
-      <Grid container spacing={3}>
+      <Grid direction="column" alignItems="center" justify="center" container spacing={3}>
         <Grid item xs={12}>
           <h1>Login</h1>
         </Grid>
         <Grid item xs={12}>
           <TextField
+            label="Email" 
             margin="normal" 
             onChange={(event) => this.setState({email: event.target.value})}>
           </TextField>
         </Grid>
         <Grid item xs={12}>
-          <TextField 
+          <TextField
+            id="standard-password-input"
+            autoComplete="current-password"
+            label="Password" 
             margin="normal" 
             onChange={(event) => this.setState({password: event.target.value})} >
         </TextField>
         </Grid>
         <Grid item xs={12}>
-        <Button size="large" variant="contained" color="primary" label="submit" onClick={(event) => this.handleClick(event)}> </Button>
+        <Button size="large" variant="contained" color="secondary" label="submit" onClick={(event) => this.handleClick(event)}>Submit</Button>
         </Grid>
       </Grid>
       {this.state.isLoggedIn && !this.state.isStaff && (

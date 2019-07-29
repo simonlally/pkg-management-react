@@ -22,19 +22,10 @@ class tenantHome extends React.Component {
 
   }  
 
-  // logout() {
-  //   console.log("sucessfully signed out");
-  //   firebase.auth().signOut();
-  // }
-
   componentDidMount() {
     this.setState({token: this.props.location.state.token});
     console.log(this.props.location.state)
-      
-    // var config = {
-    //     headers: {'Authorization': "bearer " + this.state}
-    // };
-
+  
       const getPackagesUrl = "https://us-central1-mydb-34040.cloudfunctions.net/api/packages";
 
       Axios.get(getPackagesUrl)
