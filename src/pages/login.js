@@ -1,10 +1,12 @@
 import React from 'react';
+import Axios from 'axios';
 
 import { Redirect } from 'react-router-dom';
 
+// Material UI 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Axios from 'axios';
+import Grid from '@material-ui/core/Grid';
 
 
 class login extends React.Component { 
@@ -17,12 +19,13 @@ class login extends React.Component {
         password: "", 
         isLoggedIn: false,
         token: "",
+        isStaff: null,
     };
     this.handleClick = this.handleClick.bind(this);
   }
-  
-  
 
+  
+  
   validate() {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }  
@@ -37,46 +40,75 @@ class login extends React.Component {
       "password": this.state.password,
     }
 
-    console.log(user);
-
     var headers = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*"
     }
     Axios.post(loginUrl, user, headers)
       .then((res) => {
+        console.log("*****");
         console.log(res);
+        console.log("this is the console log after res");
         this.setState({token: res.data.token});
         this.setState({isLoggedIn: true});
       })
       .catch((err) => {
         console.error(err);
       })
+    
+    Axios.get('https://us-central1-mydb-34040.cloudfunctions.net/api/isstaff')
+      .then(res => {
+        var staff;
+        for (var i = 0; i < res.data.length; i++) {
+          if (res.data[i].email === user.email) {
+            staff = res.data[i].isStaff;
+          }
+        }
+        this.setState({isStaff: staff});
+        console.log("IS STAFF????")
+        console.log(this.state.isStaff);
+      })
+      .catch(err => {
+        console.log(err);
+      })
 
   }
  
 render() {
   return (
-    <div className="Login">
-      <h1>Login</h1>
-      <TextField
-        margin="normal" 
-        onChange={(event) => this.setState({email: event.target.value})}
-      >
-     </TextField>
-     <TextField 
-        margin="normal" 
-        onChange={(event) => this.setState({password: event.target.value})} >
-     </TextField>
-     
-     <Button size="large" variant="contained" color="primary" label="submit" onClick={(event) => this.handleClick(event)}> </Button>
-     {/* { this.state.isLoggedIn && this.state.isManager ? (<Redirect to={{pathname:"/manager", state: {token: this.state.token} }}  push />) : (<Redirect to={{pathname:"/tenantHome", state: {token: this.state.token} }}  push />) } */}
-     {this.state.isLoggedIn && (
-       <Redirect to={{
-         pathname:"/tenantHome", 
-         state: {token: this.state.token} }}
-         push />
-         )}
+    <div className='container'>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <h1>Login</h1>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            margin="normal" 
+            onChange={(event) => this.setState({email: event.target.value})}>
+          </TextField>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField 
+            margin="normal" 
+            onChange={(event) => this.setState({password: event.target.value})} >
+        </TextField>
+        </Grid>
+        <Grid item xs={12}>
+        <Button size="large" variant="contained" color="primary" label="submit" onClick={(event) => this.handleClick(event)}> </Button>
+        </Grid>
+      </Grid>
+      {this.state.isLoggedIn && !this.state.isStaff && (
+        <Redirect to={{
+          pathname:"/tenantHome", 
+          state: {token: this.state.token} }}
+          push />
+          )}
+        {this.state.isLoggedIn && this.state.isStaff && (
+        <Redirect to={{
+          pathname:"/manager", 
+          state: {token: this.state.token} }}
+          push />
+          )}
     </div>
     );
   }
