@@ -91,6 +91,7 @@ render() {
         <Grid item xs={12}>
           <TextField
             id="standard-password-input"
+            type="password"
             autoComplete="current-password"
             label="Password" 
             margin="normal" 

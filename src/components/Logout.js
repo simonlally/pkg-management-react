@@ -1,7 +1,9 @@
 import React from 'react';
 import Axios from 'axios';
-
 import { Redirect } from 'react-router-dom';
+
+// Material UI
+import Button from '@material-ui/core/Button';
 
 class Logout extends React.Component {
 
@@ -32,7 +34,10 @@ class Logout extends React.Component {
     render() {
         return (
             <div>
-              <button onClick={this.logout}>Log Out</button>
+              <Button onClick={this.logout}
+                variant="contained"
+                color="secondary"
+              >Log Out</Button>
               {this.state.test && (
                 <Redirect to={{
                     pathname:"/login", 
