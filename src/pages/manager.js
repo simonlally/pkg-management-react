@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './manager.css';
 
 // Components
-import Register from '../components/Register';
 import Logout from '../components/Logout';
+//import register from '../pages/register';
 
 // Material UI
 //import TextField from '@material-ui/core/TextField';
@@ -30,37 +31,35 @@ class manager extends React.Component {
                 <h2>Package Management System</h2>
                 <div className="container">
                     <h3>Add a new package</h3>
-                    <Grid container spacing={3}>
+                    <Grid direction="column" container spacing={3}>
                         <Grid item xs={12}>
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={(event) => {this.setState({newTenant: true, viewAllPackages: false, newPackage: false})} }
+                                component={Link}
+                                to="/register"
                             >Create New Tenant Account</Button>
                         </Grid>
                         <Grid item xs={12}>
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={(event) => {this.setState({newPackage: true, viewAllPackages: false, newTenant: false})} }
+                                component={Link}
+                                to="/newpkg"
                             >Enter New Package</Button>
                         </Grid>
                         <Grid item xs={12}>
                             <Button
                                 variant="contained"
                                 color="primary"
-                                onClick={(event) => {this.setState({viewAllPackages: true, newTenant: false, newPackage: false})} }
+                                component={Link}
+                                to="showpkgs"
                             >View All Packages</Button>
                         </Grid>
-                        <Grid item xs={16}>
+                        <Grid item xs={12}>
                             <Logout />
                         </Grid>
                     </Grid>
-                </div>
-                <div className="container2">
-                    {this.state.newTenant && (
-                        <Register/>
-                    )}
                 </div>
                 
             </div>

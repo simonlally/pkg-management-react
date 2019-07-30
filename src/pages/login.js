@@ -1,6 +1,5 @@
 import React from 'react';
 import Axios from 'axios';
-
 import { Redirect } from 'react-router-dom';
 
 // Material UI 
@@ -77,7 +76,12 @@ class login extends React.Component {
 render() {
   return (
     <div className='container'>
-      <Grid direction="column" alignItems="center" justify="center" container spacing={3}>
+      <Grid 
+        direction="column" 
+        alignItems="center" 
+        justify="center" 
+        container 
+        spacing={3}>
         <Grid item xs={12}>
           <h1>Login</h1>
         </Grid>
