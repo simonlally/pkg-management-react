@@ -99,7 +99,7 @@ class register extends React.Component {
         
         </form>
         {this.state.success && (
-          <Redirect to="manager"
+          <Redirect to="/manager"
           />
         )}
       </div>

@@ -17,9 +17,12 @@ class Logout extends React.Component {
         this.logout = this.logout.bind(this);
     }
 
+    
     logout() {
+        var url = 'https://us-central1-mydb-34040.cloudfunctions.net/api/logout';
+        //var url = 'http://localhost:5000/mydb-34040/us-central1/api/logout';
         console.log("plz");
-        Axios.get('https://us-central1-mydb-34040.cloudfunctions.net/api/logout')
+        Axios.get(url)
             .then((res) => {
                 console.log(res);
                 if (res.status === 200) {

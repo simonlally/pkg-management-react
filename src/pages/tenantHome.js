@@ -33,10 +33,6 @@ class tenantHome extends React.Component {
           this.setState(
             {
               packageID: res.data[0].packageID, 
-              recipient: res.data[0].recipient,
-              received: res.data[0].received,
-              receivedBy: res.data[0].receivedBy, 
-              pickedUp: false,
             })
             console.log("RES *****");
             console.log(res.data);
@@ -53,7 +49,6 @@ class tenantHome extends React.Component {
         <h1>Tenant Home Page</h1>
           <div>
             <p> Package ID: {this.state.packageID}</p>
-            <p> Recipient: {this.state.recipient}</p>
           </div>
           <Logout />
       </div>

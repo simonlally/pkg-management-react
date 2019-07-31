@@ -32,8 +32,8 @@ class login extends React.Component {
   handleClick(event) {
     event.preventDefault();
     console.log();
-    //const localUrl = "http://localhost:5000/mydb-34040/us-central1/api";
-    const loginUrl = "https://us-central1-mydb-34040.cloudfunctions.net/api/login";
+    //const url = "http://localhost:5000/mydb-34040/us-central1/api";
+    const url = "https://us-central1-mydb-34040.cloudfunctions.net/api/login";
     const user = {
       "email": this.state.email,
       "password": this.state.password,
@@ -43,7 +43,7 @@ class login extends React.Component {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*"
     }
-    Axios.post(loginUrl, user, headers)
+    Axios.post(url, user, headers)
       .then((res) => {
         console.log("*****");
         console.log(res);

@@ -16,13 +16,33 @@ class newPackage extends React.Component {
             tenantName: "",
             staffName: "",
             packageDetails: "",
-            isPickedUp: false,
-            receivedAt: new Date().toISOString,
+            isSubmitted: null,
         }
     }
 
     handleSubmit(event) {
         event.preventDefault();
+        //const url = 'http://localhost:5000/mydb-34040/us-central1/api/newpkg';
+        const url = 'https://us-central1-mydb-34040.cloudfunctions.net/api/newpkg';
+        var headers = {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          }
+        
+        const data = {
+            tenantName: this.state.tenantName,
+            staffName: this.state.staffName,
+            packageDescription: this.state.packageDetails,
+        }
+
+        console.log(data);
+
+        Axios.post(url, data, headers)
+            .then((res) => {
+                console.log(res);
+                this.setState({isSubmitted: true});
+            })
+            .catch((err) => console.log(err))
     }
 
     render() {
@@ -40,6 +60,7 @@ class newPackage extends React.Component {
                   <TextField
                     type="text"
                     placeholder="Tenant Name"
+                    onChange={(e) => this.setState({tenantName: e.target.value})}
                     > 
                   </TextField>
                 </Grid>
@@ -47,6 +68,7 @@ class newPackage extends React.Component {
                   <TextField
                     type="text"
                     placeholder="Frontdesk Staff Name"
+                    onChange={(e) => this.setState({staffName: e.target.value})}
                     > 
                   </TextField>
                 </Grid>
@@ -56,18 +78,20 @@ class newPackage extends React.Component {
                       rowsMax="4"
                       margin="normal"
                       variant="outlined"
+                      onChange={(e) => this.setState({packageDetails: e.target.value})}
                     >
                     </TextField>
                 </Grid>
                 <Button 
                   color="secondary" 
                   variant="contained"
+                  onClick={(e) => this.handleSubmit(e)}
                 >Submit New Package</Button>
               </Grid> 
             
             </form>
-            {this.state.success && (
-              <Redirect to="manager"
+            {this.state.isSubmitted && (
+              <Redirect to="/manager"
               />
             )}
           </div>
