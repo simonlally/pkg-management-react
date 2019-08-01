@@ -1,58 +1,63 @@
-import React from 'react';
-import Axios from 'axios';
+import React from "react";
+import Axios from "axios";
 
-import Logout from '../components/Logout';
-
+import Logout from "../components/Logout";
 
 // import firebase from 'firebase';
 // firebase.initializeApp(config);
 
-class tenantHome extends React.Component { 
-
+class tenantHome extends React.Component {
   constructor(props) {
     super(props);
-      
-    this.state = {
-        packageID: "",
-        pickedUp: false,
-        recipient: "",
-        received: null,
-        receivedBy: "",
-    };
 
-  }  
+    this.state = {
+      packages: [],
+      users: [],
+      token: ""
+    };
+  }
+
+  // show all packages where packages.tenantName === users.handles
 
   componentDidMount() {
-    this.setState({token: this.props.location.state.token});
-    console.log(this.props.location.state)
-  
-      const getPackagesUrl = "https://us-central1-mydb-34040.cloudfunctions.net/api/packages";
+    console.log(this.props.location.state.email);
 
-      Axios.get(getPackagesUrl)
-        .then(res => {
-          this.setState(
-            {
-              packageID: res.data[0].packageID, 
-            })
-            console.log("RES *****");
-            console.log(res.data);
-            console.log(this.state);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+    const getPackagesUrl =
+      "https://us-central1-mydb-34040.cloudfunctions.net/api/packages";
+
+    Axios.get(getPackagesUrl)
+      .then(res => {
+        for (var i = 0; i < res.data.length; i++) {
+          this.state.packages.push(res.data[i]);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    const getAllUsersUrl =
+      "https://us-central1-mydb-34040.cloudfunctions.net/api/getallusers";
+    Axios.get(getAllUsersUrl)
+      .then(res => {
+        for (var i = 0; i < res.data.length; i++) {
+          this.state.users.push(res.data[i]);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
     return (
       <div>
         <h1>Tenant Home Page</h1>
-          <div>
-            <p> Package ID: {this.state.packageID}</p>
-          </div>
-          <Logout />
+        <div>
+          <p> Package ID: {this.state.packageID}</p>
+        </div>
+        <Logout />
       </div>
-    )
+    );
   }
 }
 
