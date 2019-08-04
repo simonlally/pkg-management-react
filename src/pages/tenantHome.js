@@ -2,46 +2,39 @@ import React from "react";
 import Axios from "axios";
 
 import Logout from "../components/Logout";
-
-// import firebase from 'firebase';
-// firebase.initializeApp(config);
+import { ListItemText, ListItem, ListSubheader } from "@material-ui/core";
 
 class tenantHome extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      packages: [],
-      users: [],
-      token: ""
+      packages: []
     };
   }
 
   // show all packages where packages.tenantName === users.handles
 
   componentDidMount() {
-    console.log(this.props.location.state.email);
+    const userHandle = this.props.location.state.handle;
+
+    const user = {
+      handle: userHandle
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    };
 
     const getPackagesUrl =
-      "https://us-central1-mydb-34040.cloudfunctions.net/api/packages";
+      "https://us-central1-mydb-34040.cloudfunctions.net/api/getpackages";
 
-    Axios.get(getPackagesUrl)
+    Axios.post(getPackagesUrl, user, headers)
       .then(res => {
-        for (var i = 0; i < res.data.length; i++) {
-          this.state.packages.push(res.data[i]);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
-
-    const getAllUsersUrl =
-      "https://us-central1-mydb-34040.cloudfunctions.net/api/getallusers";
-    Axios.get(getAllUsersUrl)
-      .then(res => {
-        for (var i = 0; i < res.data.length; i++) {
-          this.state.users.push(res.data[i]);
-        }
+        this.setState({
+          packages: res.data
+        });
       })
       .catch(err => {
         console.log(err);
@@ -51,13 +44,9 @@ class tenantHome extends React.Component {
   render() {
     return (
       <div>
-        <h1>Tenant Home Page</h1>
-        <div>
-          <p> Package ID: {this.state.packageID}</p>
-        </div>
-        <Logout />
+        
       </div>
-    );
+    )
   }
 }
 

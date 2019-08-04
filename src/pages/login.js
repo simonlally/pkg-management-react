@@ -48,8 +48,6 @@ class login extends React.Component {
         this.setState({ token: res.data.token });
         this.setState({ isLoggedIn: true });
         this.setState({ handle: res.data.handle });
-        console.log("HANDLE");
-        console.log(res.data.handle);
       })
       .catch(err => {
         console.error(err);
@@ -57,15 +55,20 @@ class login extends React.Component {
 
     Axios.get("https://us-central1-mydb-34040.cloudfunctions.net/api/isstaff")
       .then(res => {
+        console.log("res data");
+        console.log(res.data);
         var staff;
+        var userHandle;
         for (var i = 0; i < res.data.length; i++) {
           if (res.data[i].email === user.email) {
             staff = res.data[i].isStaff;
+            userHandle = res.data[i].userId;
+            
           }
         }
+        this.setState({ handle: userHandle});
         this.setState({ isStaff: staff });
-        console.log("IS STAFF????");
-        console.log(this.state.isStaff);
+        console.log(this.state.handle);
       })
       .catch(err => {
         console.log(err);
@@ -120,7 +123,7 @@ class login extends React.Component {
           <Redirect
             to={{
               pathname: "/tenantHome",
-              state: { token: this.state.token, email: this.state.email }
+              state: { token: this.state.token, handle: this.state.handle }
             }}
             push
           />
