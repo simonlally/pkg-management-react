@@ -2,7 +2,8 @@ import React from "react";
 import Axios from "axios";
 
 import Logout from "../components/Logout";
-import { ListItemText, ListItem, ListSubheader } from "@material-ui/core";
+import { ListItemText, ListItem, Container } from "@material-ui/core";
+import { Check, Package } from "react-feather";
 
 class tenantHome extends React.Component {
   constructor(props) {
@@ -34,7 +35,9 @@ class tenantHome extends React.Component {
       .then(res => {
         this.setState({
           packages: res.data
+          
         });
+        console.log(this.state.packages);
       })
       .catch(err => {
         console.log(err);
@@ -43,10 +46,32 @@ class tenantHome extends React.Component {
 
   render() {
     return (
-      <div>
-        
-      </div>
-    )
+      <Container>
+        <div>
+          <Logout />
+          <ul>
+          {this.state.packages.map((pkg) => {
+            return (
+              <ListItem key={pkg.packageId} 
+                style={{
+                  backgroundColor: pkg.isPickedUp ? 'aliceblue' : '#ffd70070',
+                  margin: '15px'
+                }}>
+                {pkg.isPickedUp && <Check style={{padding: '12px'}}/>}
+                {!pkg.isPickedUp && <Package style={{padding: '12px'}} /> }
+                <ListItemText
+                  primary={pkg.packageDescription}
+                  secondary={pkg.receivedAt}
+                  ></ListItemText>
+                  <p></p>
+                <p>Received by staff: {pkg.staffName}</p>
+              </ListItem>
+            )
+          })}
+          </ul>
+        </div>
+      </Container>
+    );
   }
 }
 
