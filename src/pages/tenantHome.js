@@ -35,7 +35,6 @@ class tenantHome extends React.Component {
       .then(res => {
         this.setState({
           packages: res.data
-          
         });
         console.log(this.state.packages);
       })
@@ -48,28 +47,30 @@ class tenantHome extends React.Component {
     return (
       <Container>
         <div>
-          <Logout />
           <ul>
-          {this.state.packages.map((pkg) => {
-            return (
-              <ListItem key={pkg.packageId} 
-                style={{
-                  backgroundColor: pkg.isPickedUp ? 'aliceblue' : '#ffd70070',
-                  margin: '15px'
-                }}>
-                {pkg.isPickedUp && <Check style={{padding: '12px'}}/>}
-                {!pkg.isPickedUp && <Package style={{padding: '12px'}} /> }
-                <ListItemText
-                  primary={pkg.packageDescription}
-                  secondary={pkg.receivedAt}
-                  ></ListItemText>
-                  <p></p>
-                <p>Received by staff: {pkg.staffName}</p>
-              </ListItem>
-            )
-          })}
+            {this.state.packages.map(pkg => {
+              return (
+                <ListItem
+                  key={pkg.packageId}
+                  style={{
+                    backgroundColor: pkg.isPickedUp ? "aliceblue" : "#ffd70070",
+                    margin: "15px"
+                  }}
+                >
+                  {pkg.isPickedUp && <Check style={{ padding: "12px" }} />}
+                  {!pkg.isPickedUp && <Package style={{ padding: "12px" }} />}
+                  <ListItemText
+                    primary={pkg.packageDescription}
+                    secondary={pkg.receivedAt}
+                  />
+                  <p />
+                  <p>Received by staff: {pkg.staffName}</p>
+                </ListItem>
+              );
+            })}
           </ul>
         </div>
+        <Logout />
       </Container>
     );
   }

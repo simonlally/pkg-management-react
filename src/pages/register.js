@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Material UI
 import TextField from "@material-ui/core/TextField";
@@ -57,7 +58,15 @@ class register extends React.Component {
   render() {
     return (
       <div>
-        <h3>register new tenant</h3>
+        
+        <Button
+          component={Link}
+          to="/manager"
+          variant="contained"
+          color="primary"
+        >
+          Back
+        </Button>
         <form className="new-tenant-form">
           <Grid
             direction="column"
@@ -66,6 +75,7 @@ class register extends React.Component {
             justify="center"
             spacing={3}
           >
+          <h3>register new tenant</h3>
             <Grid item xs={12}>
               <TextField
                 type="text"

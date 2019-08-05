@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
+import { Package } from "react-feather";
 
 // Material UI
 import TextField from "@material-ui/core/TextField";
@@ -63,12 +64,10 @@ class login extends React.Component {
           if (res.data[i].email === user.email) {
             staff = res.data[i].isStaff;
             userHandle = res.data[i].userId;
-            
           }
         }
-        this.setState({ handle: userHandle});
+        this.setState({ handle: userHandle });
         this.setState({ isStaff: staff });
-        console.log(this.state.handle);
       })
       .catch(err => {
         console.log(err);
@@ -88,6 +87,7 @@ class login extends React.Component {
           <Grid item xs={12}>
             <h1>Login</h1>
           </Grid>
+          <Package/>
           <Grid item xs={12}>
             <TextField
               label="Email"

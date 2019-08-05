@@ -10,17 +10,16 @@ import newPackage from "./pages/newPackage";
 
 import manager from "./pages/manager";
 import showPackages from "./pages/showPackages";
-import Navbar from "./components/Navbar";
-import Container from '@material-ui/core/Container';
+// import Navbar from "./components/Navbar";
+import Container from "@material-ui/core/Container";
 
 class App extends React.Component {
   render() {
     return (
       <div>
         <Router>
-        <Navbar/>
+          {/* <Navbar/> */}
           <Container className="main-div">
-            
             <Switch>
               <Route exact path="/" component={home} />
               <Route exact path="/login" component={login} />

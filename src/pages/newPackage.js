@@ -2,6 +2,7 @@ import React from "react";
 import Axios from "axios";
 
 import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Material UI
 import TextField from "@material-ui/core/TextField";
@@ -48,6 +49,14 @@ class newPackage extends React.Component {
   render() {
     return (
       <div>
+        <Button
+          component={Link}
+          to="/manager"
+          variant="contained"
+          color="primary"
+        >
+          Back
+        </Button>
         <form className="new-package-form">
           <Grid
             direction="column"

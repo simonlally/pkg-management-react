@@ -28,7 +28,6 @@ class manager extends React.Component {
         <h1>Linwood Management Frontdesk</h1>
         <h2>Package Management System</h2>
         <div className="container">
-          <h3>Add a new package</h3>
           <Grid direction="column" container spacing={3}>
             <Grid item xs={12}>
               <Button
@@ -55,7 +54,7 @@ class manager extends React.Component {
                 variant="contained"
                 color="primary"
                 component={Link}
-                to="showpkgs"
+                to="/showpkgs"
               >
                 View All Packages
               </Button>
