@@ -5,6 +5,12 @@ import Logout from "../components/Logout";
 import { ListItemText, ListItem, Container } from "@material-ui/core";
 import { Check, Package } from "react-feather";
 
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
+import "react-notifications/dist/react-notifications.css";
+
 class tenantHome extends React.Component {
   constructor(props) {
     super(props);
@@ -14,6 +20,11 @@ class tenantHome extends React.Component {
     };
   }
 
+  createNotification() {
+    return () => {
+      NotificationManager.info("test");
+    };
+  }
   // show all packages where packages.tenantName === users.handles
 
   componentDidMount() {
@@ -46,6 +57,7 @@ class tenantHome extends React.Component {
   render() {
     return (
       <Container>
+        <NotificationContainer />
         <div>
           <ul>
             {this.state.packages.map(pkg => {
@@ -58,7 +70,8 @@ class tenantHome extends React.Component {
                   }}
                 >
                   {pkg.isPickedUp && <Check style={{ padding: "12px" }} />}
-                  {!pkg.isPickedUp && <Package style={{ padding: "12px" }} />}
+                  {!pkg.isPickedUp && <Package style={{ padding: "12px" }} /> &&
+                    NotificationManager.warning("You have a new package waiting!")}
                   <ListItemText
                     primary={pkg.packageDescription}
                     secondary={pkg.receivedAt}
