@@ -29,7 +29,6 @@ class login extends React.Component {
 
   handleClick(event) {
     event.preventDefault();
-    console.log();
     //const url = "http://localhost:5000/mydb-34040/us-central1/api";
     const url = "https://us-central1-mydb-34040.cloudfunctions.net/api/login";
     const user = {
@@ -87,7 +86,7 @@ class login extends React.Component {
           <Grid item xs={12}>
             <h1>Login</h1>
           </Grid>
-          <Package/>
+          <Package />
           <Grid item xs={12}>
             <TextField
               label="Email"

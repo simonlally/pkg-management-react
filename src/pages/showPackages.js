@@ -4,17 +4,14 @@ import Axios from "axios";
 import Logout from "../components/Logout";
 import { Link } from "react-router-dom";
 
-import { Check } from "react-feather";
+import { Check, Trash2 } from "react-feather";
+import "./showPackages.css";
 
 // Material UI
-// import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
-// import Grid from '@material-ui/core/Grid';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-// import ListSubheader from "@material-ui/core/ListSubheader";
-import { Checkbox, Container } from "@material-ui/core";
-//import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { Container } from "@material-ui/core";
 
 class showPackages extends React.Component {
   constructor(props) {
@@ -23,6 +20,9 @@ class showPackages extends React.Component {
     this.state = {
       pkgs: []
     };
+
+    this.delete = this.delete.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +39,56 @@ class showPackages extends React.Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  updateStatus(event, pkg) {
+    event.preventDefault();
+
+    const data = {
+      isPickedUp: true,
+      packageId: pkg.packageId
+    };
+
+    console.log(data);
+
+    var headers = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    };
+
+    const url =
+      "https://us-central1-mydb-34040.cloudfunctions.net/api/updatestatus";
+    Axios.post(url, data, headers)
+      .then(res => {
+        // this should be done using a lifecycle method
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  delete(event, pkg) {
+    event.preventDefault();
+
+    const data = {
+      packageId: pkg.packageId
+    }
+
+    const headers = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
+    };
+
+    const url = "https://us-central1-mydb-34040.cloudfunctions.net/api/delete";
+
+    Axios.post(url, data, headers)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   render() {
@@ -64,15 +114,28 @@ class showPackages extends React.Component {
                   }}
                 >
                   {pkg.isPickedUp && <Check style={{ padding: "12px" }} />}
-                  {!pkg.isPickedUp && <Checkbox style={{ padding: "12px" }} />}
+                  {!pkg.isPickedUp && (
+                    <button onClick={event => this.updateStatus(event, pkg)}>
+                      received
+                    </button>
+                  )}
                   <ListItemText
                     primary={pkg.packageDescription}
                     secondary={pkg.receivedAt}
                   />
                   <p>For tenant: {pkg.tenantName}</p>
-                  <br></br>
+                  <br />
                   <p> &nbsp; </p>
                   <p> Received by staff: {pkg.staffName}</p>
+                  <div className="delete">
+                    <button
+                      onClick={event => {
+                        this.delete(event, pkg);
+                      }}
+                    >
+                      <Trash2 />
+                    </button>
+                  </div>
                 </ListItem>
               );
             })}
