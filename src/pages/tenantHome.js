@@ -20,13 +20,6 @@ class tenantHome extends React.Component {
     };
   }
 
-  createNotification() {
-    return () => {
-      NotificationManager.info("test");
-    };
-  }
-  // show all packages where packages.tenantName === users.handles
-
   componentDidMount() {
     const userHandle = this.props.location.state.handle;
 

@@ -8,6 +8,12 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
+import {
+  NotificationContainer,
+  NotificationManager
+} from "react-notifications";
+import "react-notifications/dist/react-notifications.css";
+
 class register extends React.Component {
   constructor(props) {
     super(props);
@@ -58,7 +64,9 @@ class register extends React.Component {
   render() {
     return (
       <div>
-        
+        <NotificationContainer />
+        {this.state.success &&
+          NotificationManager.success("New tenant registered successfully")}
         <Button
           component={Link}
           to="/manager"
@@ -75,7 +83,7 @@ class register extends React.Component {
             justify="center"
             spacing={3}
           >
-          <h3>register new tenant</h3>
+            <h3>register new tenant</h3>
             <Grid item xs={12}>
               <TextField
                 type="text"
@@ -113,7 +121,7 @@ class register extends React.Component {
             </Button>
           </Grid>
         </form>
-        {this.state.success && <Redirect to="/manager" />}
+        {/* {this.state.success && <Redirect to="/manager" />} */}
       </div>
     );
   }
