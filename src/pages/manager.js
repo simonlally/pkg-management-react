@@ -4,7 +4,7 @@ import "./manager.css";
 
 // Components
 import Logout from "../components/Logout";
-//import register from '../pages/register';
+import { Package } from "react-feather";
 
 // Material UI
 //import TextField from '@material-ui/core/TextField';
@@ -25,12 +25,19 @@ class manager extends React.Component {
   render() {
     return (
       <div>
-        <h1>Linwood Management Frontdesk</h1>
-        <h2>Package Management System</h2>
         <div className="container">
-          <Grid direction="column" container spacing={3}>
+          <Grid
+            direction="column"
+            alignItems="center"
+            justify="center"
+            container
+            spacing={3}
+          >
+            <h1>Linwood Management Frontdesk</h1>
+            <Package/>
+            <h2>Package Management System</h2>
             <Grid item xs={12}>
-              <Button
+              <Button className="btn"
                 variant="contained"
                 color="primary"
                 component={Link}
@@ -40,7 +47,7 @@ class manager extends React.Component {
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <Button
+              <Button className="btn"
                 variant="contained"
                 color="primary"
                 component={Link}
@@ -50,7 +57,7 @@ class manager extends React.Component {
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <Button
+              <Button className="btn"
                 variant="contained"
                 color="primary"
                 component={Link}

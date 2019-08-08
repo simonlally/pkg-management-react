@@ -1,6 +1,5 @@
 import React from "react";
 import Axios from "axios";
-import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 // Material UI
