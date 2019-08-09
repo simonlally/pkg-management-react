@@ -36,8 +36,22 @@ class manager extends React.Component {
             <h1>Linwood Management Frontdesk</h1>
             <Package />
             <h2>Package Management System</h2>
+
             <Grid item xs={12}>
-              <Button className="btn"
+              <Button
+                className="btn"
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/showpkgs"
+              >
+                View All Packages
+              </Button>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button
+                className="btn"
                 variant="contained"
                 color="primary"
                 component={Link}
@@ -47,7 +61,8 @@ class manager extends React.Component {
               </Button>
             </Grid>
             <Grid item xs={12}>
-              <Button className="btn"
+              <Button
+                className="btn"
                 variant="contained"
                 color="primary"
                 component={Link}
@@ -56,16 +71,7 @@ class manager extends React.Component {
                 Enter New Package
               </Button>
             </Grid>
-            <Grid item xs={12}>
-              <Button className="btn"
-                variant="contained"
-                color="primary"
-                component={Link}
-                to="/showpkgs"
-              >
-                View All Packages
-              </Button>
-            </Grid>
+
             <Grid item xs={12}>
               <Logout />
             </Grid>
