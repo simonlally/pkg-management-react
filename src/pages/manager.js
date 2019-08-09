@@ -34,7 +34,7 @@ class manager extends React.Component {
             spacing={3}
           >
             <h1>Linwood Management Frontdesk</h1>
-            <Package/>
+            <Package />
             <h2>Package Management System</h2>
             <Grid item xs={12}>
               <Button className="btn"

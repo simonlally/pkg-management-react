@@ -92,6 +92,7 @@ class login extends React.Component {
               label="Email"
               margin="normal"
               onChange={event => this.setState({ email: event.target.value })}
+              variant="outlined"
             />
           </Grid>
           <Grid item xs={12}>
@@ -104,6 +105,7 @@ class login extends React.Component {
               onChange={event =>
                 this.setState({ password: event.target.value })
               }
+              variant="outlined"
             />
           </Grid>
           <Grid item xs={12}>

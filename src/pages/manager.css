@@ -1,13 +1,22 @@
-/* .container {
-    width: 40%;
-    float: left;
+body {
+  background-color: #f7f7f7;
 }
 
-.container2 {
-    
-} */
+h1, h2, h3 {
+  font-family: 'Oxygen', sans-serif;
+  color: '#20405d';
+}
 
 .container .btn {
   width: 300px;
   height: 70px;
+}
+
+p {
+  font-family: 'Mada', sans-serif;
+  color: #423d3d;
+}
+
+.container input {
+  width: 300px;
 }

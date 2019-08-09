@@ -109,32 +109,37 @@ class showPackages extends React.Component {
                 <ListItem
                   key={pkg.packageId}
                   style={{
-                    backgroundColor: pkg.isPickedUp ? "aliceblue" : "#ffd70070",
+                    backgroundColor: pkg.isPickedUp ? "#c5e4ff" : "#ffd70070",
                     margin: "15px"
                   }}
                 >
-                  {pkg.isPickedUp && <Check style={{ padding: "12px" }} />}
+                  {pkg.isPickedUp && <Check style={{ padding: "0px 40px" }} />}
                   {!pkg.isPickedUp && (
-                    <button onClick={event => this.updateStatus(event, pkg)}>
-                      received
-                    </button>
+                    <Button
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                    onClick={event => this.updateStatus(event, pkg)} >
+                      Received
+                  </Button>
                   )}
                   <ListItemText
                     primary={pkg.packageDescription}
                     secondary={pkg.receivedAt}
                   />
-                  <p>For tenant: {pkg.tenantName}</p>
+                  <p>For tenant: <strong>{pkg.tenantName}</strong></p>
                   <br />
                   <p> &nbsp; </p>
                   <p> Received by staff: {pkg.staffName}</p>
                   <div className="delete">
-                    <button
+                    <Button
                       onClick={event => {
                         this.delete(event, pkg);
                       }}
+                      color="secondary"
                     >
                       <Trash2 />
-                    </button>
+                    </Button>
                   </div>
                 </ListItem>
               );

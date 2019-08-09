@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import { UserPlus } from "react-feather";
 
 import {
   NotificationContainer,
@@ -62,7 +63,7 @@ class register extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <NotificationContainer />
         {this.state.success &&
           NotificationManager.success("New tenant registered successfully")}
@@ -82,17 +83,21 @@ class register extends React.Component {
             justify="center"
             spacing={3}
           >
-            <h3>register new tenant</h3>
-            <Grid item xs={12}>
+            <h3>Register a New Tenant</h3>
+            <UserPlus />
+            <Grid item xs={12} style={{marginTop: "50px"}}>
               <TextField
                 type="text"
                 placeholder="tenant email"
+                label="Tenant Email Addres"
                 onChange={event => this.setState({ email: event.target.value })}
+                variant="outlined"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 type="password"
+                label="Tenant Password"
                 placeholder="tenant password"
                 onChange={event =>
                   this.setState({
@@ -100,15 +105,18 @@ class register extends React.Component {
                     confirmPassword: event.target.value
                   })
                 }
+                variant="outlined"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 type="text"
                 placeholder="tenant name"
+                label="Tenant Full Name"
                 onChange={event =>
                   this.setState({ handle: event.target.value })
                 }
+                variant="outlined"
               />
             </Grid>
             <Button

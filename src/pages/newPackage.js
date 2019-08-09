@@ -53,7 +53,7 @@ class newPackage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <NotificationContainer />
         {this.state.isSubmitted &&
           NotificationManager.success("New package created successfully")}
@@ -77,15 +77,19 @@ class newPackage extends React.Component {
             <Grid item xs={12}>
               <TextField
                 type="text"
+                label="Tenant Name"
                 placeholder="Tenant Name"
                 onChange={e => this.setState({ tenantName: e.target.value })}
+                variant="outlined"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 type="text"
+                label="Frontdesk Staff Name"
                 placeholder="Frontdesk Staff Name"
                 onChange={e => this.setState({ staffName: e.target.value })}
+                variant="outlined"
               />
             </Grid>
             <Grid item xs={12}>
