@@ -3,11 +3,7 @@ import Axios from "axios";
 import { Redirect } from "react-router-dom";
 import { Package } from "react-feather";
 
-// Material UI
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import { Container } from "@material-ui/core";
+import { Container, TextField, Button, Grid } from "@material-ui/core";
 
 class login extends React.Component {
   constructor(props) {
@@ -76,11 +72,18 @@ class login extends React.Component {
 
   render() {
     return (
-      <Container className="card">
+      <Container
+        className="home"
+        maxWidth="sm"
+        style={{
+          border: "1px solid rgb(226, 226, 243)",
+          marginTop: "100px"
+        }}
+      >
         <Grid
           direction="column"
           alignItems="center"
-          justify="center"
+          justif="center"
           container
           spacing={3}
         >
@@ -109,17 +112,15 @@ class login extends React.Component {
               variant="outlined"
             />
           </Grid>
-          <Grid item xs={12}>
-            <Button
-              size="large"
-              variant="contained"
-              color="secondary"
-              label="submit"
-              onClick={event => this.handleClick(event)}
-            >
-              login
-            </Button>
-          </Grid>
+          <Button
+            size="large"
+            variant="contained"
+            color="secondary"
+            label="submit"
+            onClick={event => this.handleClick(event)}
+          >
+            login
+          </Button>
         </Grid>
         {this.state.isLoggedIn && !this.state.isStaff && (
           <Redirect
