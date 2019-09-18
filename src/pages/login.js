@@ -117,6 +117,7 @@ class login extends React.Component {
             variant="contained"
             color="secondary"
             label="submit"
+            style={{ width: "149px", padding: "14px" }}
             onClick={event => this.handleClick(event)}
           >
             login
