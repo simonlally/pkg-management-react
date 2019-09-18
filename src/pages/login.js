@@ -7,6 +7,7 @@ import { Package } from "react-feather";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import { Container } from "@material-ui/core";
 
 class login extends React.Component {
   constructor(props) {
@@ -75,7 +76,7 @@ class login extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <Container className="card">
         <Grid
           direction="column"
           alignItems="center"
@@ -116,7 +117,7 @@ class login extends React.Component {
               label="submit"
               onClick={event => this.handleClick(event)}
             >
-              Submit
+              login
             </Button>
           </Grid>
         </Grid>
@@ -138,7 +139,7 @@ class login extends React.Component {
             push
           />
         )}
-      </div>
+      </Container>
     );
   }
 }
