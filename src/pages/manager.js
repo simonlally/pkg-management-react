@@ -7,9 +7,7 @@ import Logout from "../components/Logout";
 import { Package } from "react-feather";
 
 // Material UI
-//import TextField from '@material-ui/core/TextField';
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
+import { Container, Grid, Button } from "@material-ui/core";
 
 class manager extends React.Component {
   constructor(props) {
@@ -24,60 +22,55 @@ class manager extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="container">
-          <Grid
-            direction="column"
-            alignItems="center"
-            justify="center"
-            container
-            spacing={3}
-          >
-            <h1>Linwood Management Frontdesk</h1>
-            <Package />
-            <h2>Package Management System</h2>
+      <Container maxWidth="sm" className="card">
+        <Grid
+          direction="column"
+          alignItems="center"
+          justify="center"
+          container
+          spacing={3}
+        >
+          <h1>Linwood Management Frontdesk</h1>
+          <Package />
+          <h2>Package Management System</h2>
 
-            <Grid item xs={12}>
-              <Button
-                className="btn"
-                variant="contained"
-                color="primary"
-                component={Link}
-                to="/showpkgs"
-              >
-                View All Packages
-              </Button>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Button
-                className="btn"
-                variant="contained"
-                color="primary"
-                component={Link}
-                to="/register"
-              >
-                Create New Tenant Account
-              </Button>
-            </Grid>
-            <Grid item xs={12}>
-              <Button
-                className="btn"
-                variant="contained"
-                color="primary"
-                component={Link}
-                to="/newpkg"
-              >
-                Enter New Package
-              </Button>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Logout />
-            </Grid>
+          <Grid item>
+            <Button
+              className="btn"
+              variant="contained"
+              color="primary"
+              component={Link}
+              to="/showpkgs"
+            >
+              View All Packages
+            </Button>
           </Grid>
-        </div>
-      </div>
+
+          <Grid item>
+            <Button
+              className="btn"
+              variant="contained"
+              color="primary"
+              component={Link}
+              to="/register"
+            >
+              Create New Tenant Account
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              className="btn"
+              variant="contained"
+              color="primary"
+              component={Link}
+              to="/newpkg"
+            >
+              Enter New Package
+            </Button>
+          </Grid>
+          <Logout />
+        </Grid>
+      </Container>
     );
   }
 }

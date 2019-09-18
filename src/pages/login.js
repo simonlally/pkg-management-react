@@ -26,7 +26,6 @@ class login extends React.Component {
 
   handleClick(event) {
     event.preventDefault();
-    //const url = "http://localhost:5000/mydb-34040/us-central1/api";
     const url = "https://us-central1-mydb-34040.cloudfunctions.net/api/login";
     const user = {
       email: this.state.email,
@@ -39,9 +38,6 @@ class login extends React.Component {
     };
     Axios.post(url, user, headers)
       .then(res => {
-        console.log("*****");
-        console.log(res);
-        console.log("this is the console log after res");
         this.setState({ token: res.data.token });
         this.setState({ isLoggedIn: true });
         this.setState({ handle: res.data.handle });
@@ -52,8 +48,6 @@ class login extends React.Component {
 
     Axios.get("https://us-central1-mydb-34040.cloudfunctions.net/api/isstaff")
       .then(res => {
-        console.log("res data");
-        console.log(res.data);
         var staff;
         var userHandle;
         for (var i = 0; i < res.data.length; i++) {
@@ -72,14 +66,7 @@ class login extends React.Component {
 
   render() {
     return (
-      <Container
-        className="home"
-        maxWidth="sm"
-        style={{
-          border: "1px solid rgb(226, 226, 243)",
-          marginTop: "100px"
-        }}
-      >
+      <Container className="card" maxWidth="sm">
         <Grid
           direction="column"
           alignItems="center"
