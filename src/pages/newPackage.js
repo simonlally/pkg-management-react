@@ -3,10 +3,8 @@ import Axios from "axios";
 
 import { Link } from "react-router-dom";
 
-// Material UI
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
+import { Container, Grid, TextField, Button } from "@material-ui/core";
+import { Package } from "react-feather";
 
 import {
   NotificationContainer,
@@ -41,22 +39,19 @@ class newPackage extends React.Component {
       packageDescription: this.state.packageDetails
     };
 
-    console.log(data);
-
     Axios.post(url, data, headers)
       .then(res => {
         console.log(res);
         this.setState({ isSubmitted: true });
       })
       .catch(err => console.log(err));
+
+    document.getElementById("new-package-form").reset();
   }
 
   render() {
     return (
-      <div className="container">
-        <NotificationContainer />
-        {this.state.isSubmitted &&
-          NotificationManager.success("New package created successfully")}
+      <div>
         <Button
           component={Link}
           to="/manager"
@@ -65,54 +60,59 @@ class newPackage extends React.Component {
         >
           Back
         </Button>
-        <form className="new-package-form">
-          <Grid
-            direction="column"
-            container
-            alignItems="center"
-            justify="center"
-            spacing={3}
-          >
-            <h3>Enter New Package Information</h3>
-            <Grid item xs={12}>
-              <TextField
-                type="text"
-                label="Tenant Name"
-                placeholder="Tenant Name"
-                onChange={e => this.setState({ tenantName: e.target.value })}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                type="text"
-                label="Frontdesk Staff Name"
-                placeholder="Frontdesk Staff Name"
-                onChange={e => this.setState({ staffName: e.target.value })}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Package Details"
-                rowsMax="4"
-                margin="normal"
-                variant="outlined"
-                onChange={e =>
-                  this.setState({ packageDetails: e.target.value })
-                }
-              />
-            </Grid>
-            <Button
-              color="secondary"
-              variant="contained"
-              onClick={e => this.handleSubmit(e)}
+        <Container className="card" maxWidth="sm">
+          <NotificationContainer />
+          {this.state.isSubmitted &&
+            NotificationManager.success("New package created successfully")}
+
+          <form id="new-package-form">
+            <Grid
+              direction="column"
+              container
+              alignItems="center"
+              justify="center"
+              spacing={3}
             >
-              Submit New Package
-            </Button>
-          </Grid>
-        </form>
-        {/* {this.state.isSubmitted && <Redirect to="/manager" />} */}
+              <h3>Enter New Package Information</h3>
+              <Package size="45" stroke="#d29c9c" fill="#b98324" />
+              <Grid item xs={12}>
+                <TextField
+                  type="text"
+                  label="Tenant Name"
+                  placeholder="Tenant Name"
+                  onChange={e => this.setState({ tenantName: e.target.value })}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  type="text"
+                  label="Frontdesk Staff Name"
+                  placeholder="Frontdesk Staff Name"
+                  onChange={e => this.setState({ staffName: e.target.value })}
+                  variant="outlined"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Package Details"
+                  rowsMax="4"
+                  variant="outlined"
+                  onChange={e =>
+                    this.setState({ packageDetails: e.target.value })
+                  }
+                />
+              </Grid>
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={e => this.handleSubmit(e)}
+              >
+                Submit New Package
+              </Button>
+            </Grid>
+          </form>
+        </Container>
       </div>
     );
   }
