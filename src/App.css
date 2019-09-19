@@ -4,7 +4,7 @@
 }
 
 body {
-  background-image: url("C:\Users\simon\react\pkg-management-react\src\assets\pkg-background.jpeg");
+  background-image: url("../src/assets/pkg-background.jpeg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center bottom;
