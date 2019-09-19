@@ -22,7 +22,7 @@ class manager extends React.Component {
 
   render() {
     return (
-      <Container maxWidth="sm" className="card">
+      <Container style={{ width: "80%" }} className="card">
         <Grid
           direction="column"
           alignItems="center"
