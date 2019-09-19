@@ -1,17 +1,17 @@
 import React from "react";
 import Axios from "axios";
-
 import Logout from "../components/Logout";
 import { Link } from "react-router-dom";
 
 import { Check, Trash2 } from "react-feather";
 import "./showPackages.css";
-
-// Material UI
-import Button from "@material-ui/core/Button";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Container } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  Button,
+  ListItem,
+  ListItemText
+} from "@material-ui/core";
 
 class showPackages extends React.Component {
   constructor(props) {
@@ -73,7 +73,7 @@ class showPackages extends React.Component {
 
     const data = {
       packageId: pkg.packageId
-    }
+    };
 
     const headers = {
       "Content-Type": "application/json",
@@ -88,7 +88,7 @@ class showPackages extends React.Component {
       })
       .catch(err => {
         console.log(err);
-      })
+      });
   }
 
   render() {
@@ -102,50 +102,58 @@ class showPackages extends React.Component {
         >
           Back
         </Button>
-        <div>
-          <ul>
-            {this.state.pkgs.map(pkg => {
-              return (
-                <ListItem
-                  key={pkg.packageId}
-                  style={{
-                    backgroundColor: pkg.isPickedUp ? "#c5e4ff" : "#ffd70070",
-                    margin: "15px"
-                  }}
-                >
-                  {pkg.isPickedUp && <Check style={{ padding: "0px 40px" }} />}
-                  {!pkg.isPickedUp && (
-                    <Button
-                    size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={event => this.updateStatus(event, pkg)} >
-                      Received
-                  </Button>
-                  )}
-                  <ListItemText
-                    primary={pkg.packageDescription}
-                    secondary={pkg.receivedAt}
-                  />
-                  <p>For tenant: <strong>{pkg.tenantName}</strong></p>
-                  <br />
-                  <p> &nbsp; </p>
-                  <p> Received by staff: {pkg.staffName}</p>
-                  <div className="delete">
-                    <Button
-                      onClick={event => {
-                        this.delete(event, pkg);
-                      }}
-                      color="secondary"
-                    >
-                      <Trash2 />
-                    </Button>
-                  </div>
-                </ListItem>
-              );
-            })}
-          </ul>
-        </div>
+        <Grid>
+          <div>
+            <ul>
+              {this.state.pkgs.map(pkg => {
+                return (
+                  <ListItem
+                    key={pkg.packageId}
+                    style={{
+                      backgroundColor: pkg.isPickedUp ? "#dbdbdb" : "#ffde2d",
+                      margin: "15px"
+                    }}
+                  >
+                    {pkg.isPickedUp && (
+                      <Check style={{ padding: "0px 40px" }} />
+                    )}
+                    {!pkg.isPickedUp && (
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="primary"
+                        onClick={event => this.updateStatus(event, pkg)}
+                      >
+                        Received
+                      </Button>
+                    )}
+                    <ListItemText
+                      primary={pkg.packageDescription}
+                      secondary={pkg.receivedAt}
+                    />
+                    <p>
+                      For tenant: <strong>{pkg.tenantName}</strong>
+                    </p>
+                    <br />
+                    <p> &nbsp; </p>
+                    <p> Received by staff: {pkg.staffName}</p>
+                    <div className="delete">
+                      <Button
+                        onClick={event => {
+                          this.delete(event, pkg);
+                        }}
+                        color="secondary"
+                      >
+                        <Trash2 />
+                      </Button>
+                    </div>
+                  </ListItem>
+                );
+              })}
+            </ul>
+          </div>
+        </Grid>
+
         <Logout />
       </Container>
     );

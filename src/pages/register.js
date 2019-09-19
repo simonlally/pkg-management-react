@@ -42,8 +42,6 @@ class register extends React.Component {
       "Access-Control-Allow-Origin": "*"
     };
 
-    console.log(tenant);
-
     const url = "https://us-central1-mydb-34040.cloudfunctions.net/api/signup";
     Axios.post(url, tenant, headers)
       .then(res => {
