@@ -3,7 +3,8 @@ import Axios from "axios";
 import Logout from "../components/Logout";
 import { Link } from "react-router-dom";
 
-import { Check, Trash2 } from "react-feather";
+import moment from "moment";
+import { CheckCircle, Trash2 } from "react-feather";
 import "./showPackages.css";
 import {
   Container,
@@ -26,12 +27,10 @@ class showPackages extends React.Component {
   }
 
   componentDidMount() {
-    console.log("packages component mounted");
     const url =
       "https://us-central1-mydb-34040.cloudfunctions.net/api/packages";
     Axios.get(url)
       .then(res => {
-        console.log(res);
         this.setState({
           pkgs: res.data
         });
@@ -115,7 +114,7 @@ class showPackages extends React.Component {
                     }}
                   >
                     {pkg.isPickedUp && (
-                      <Check style={{ padding: "0px 40px" }} />
+                      <CheckCircle style={{ padding: "0px 40px" }} />
                     )}
                     {!pkg.isPickedUp && (
                       <Button
@@ -129,7 +128,7 @@ class showPackages extends React.Component {
                     )}
                     <ListItemText
                       primary={pkg.packageDescription}
-                      secondary={pkg.receivedAt}
+                      secondary={moment(pkg.receivedAt).format("lll")}
                     />
                     <p>
                       For tenant: <strong>{pkg.tenantName}</strong>
