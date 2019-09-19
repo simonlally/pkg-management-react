@@ -70,7 +70,7 @@ class login extends React.Component {
         <Grid
           direction="column"
           alignItems="center"
-          justif="center"
+          justify="center"
           container
           spacing={3}
         >
