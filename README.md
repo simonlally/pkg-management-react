@@ -4,7 +4,6 @@
 [React](https://github.com/facebook/react) app that serves as a system to track incoming packages to an apartment building or complex.  Authentication and database storage are handled by [Firebase](https://github.com/firebase/).
 
 ### Requirements
-This project requires ```Nodejs```.
 This project requires [Nodejs](https://github.com/nodejs).
 
 
