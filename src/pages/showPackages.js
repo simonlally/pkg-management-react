@@ -130,12 +130,16 @@ class showPackages extends React.Component {
                       primary={pkg.packageDescription}
                       secondary={moment(pkg.receivedAt).format("lll")}
                     />
-                    <p>
+                    <ListItemText
+                      primary={"for: " + pkg.tenantName}
+                      secondary={"received by: " + pkg.staffName}
+                    ></ListItemText>
+                    {/* <p>
                       For tenant: <strong>{pkg.tenantName}</strong>
                     </p>
                     <br />
                     <p> &nbsp; </p>
-                    <p> Received by staff: {pkg.staffName}</p>
+                    <p> Received by staff: {pkg.staffName}</p> */}
                     <div className="delete">
                       <Button
                         onClick={event => {
