@@ -104,7 +104,9 @@ class tenantHome extends React.Component {
                     secondary={moment(pkg.receivedAt).format("lll")}
                   />
                   <p />
-                  <p>Received by staff: {pkg.staffName}</p>
+                  <ListItemText
+                    primary={"received by: " + pkg.staffName}
+                  ></ListItemText>
                 </ListItem>
               );
             })}
