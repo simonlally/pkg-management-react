@@ -77,7 +77,7 @@ class login extends React.Component {
           <Grid item xs={12}>
             <h1>Login</h1>
           </Grid>
-          <Package />
+          <Package size="45" stroke="#d29c9c" fill="#b98324" />
           <Grid item xs={12}>
             <TextField
               label="Email"
